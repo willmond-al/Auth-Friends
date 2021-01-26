@@ -26,7 +26,7 @@ class Login extends React.Component{
         axios.post("http://localhost:5000/api/login", this.state.credentials)
         .then(res=>{
             localStorage.setItem('token', res.data.payload)
-            console.log(res)
+            this.props.history.push('/friends')
         })
         .catch(err=>{
             console.log(err)
@@ -42,6 +42,7 @@ class Login extends React.Component{
                 type='text'
                 name='username'
                 placeholder='username'
+                value={this.state.credentials.username}
                 onChange={this.handleChange}/>
                 </label>
                 <label>Password:
@@ -49,6 +50,7 @@ class Login extends React.Component{
                 type='password'
                 name='password'
                 placeholder='password'
+                value={this.state.credentials.password}
                 onChange={this.handleChange}/>
                 </label>
                 <button>Login</button>
