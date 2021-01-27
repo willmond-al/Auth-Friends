@@ -1,22 +1,29 @@
 import React from 'react'
+import {axiosWithAuth} from '../utils/axiosWithAuth'
 
-// export const Friend = props =>{
-//     return(
-//         <div>
-//             {props.name}
-//         </div>
-//     )
-// }
 
-class Friend extends React.Component{
-    render(){
+const Friend = props =>{
+    const deleteFriend = e =>{
+        e.preventDefault()
+        axiosWithAuth()
+        .delete(`friends/${props.friend.id}`)
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+     }
+
         return(
             <div>
-            {this.props.friend.name}
+            {props.friend.name}, age:{props.friend.age}<br/>
+            email:{props.friend.email}<br/>
+            <button onClick={deleteFriend}>delete</button>
         </div>
         )
 
-    }
+    
 }
 
 export default Friend
